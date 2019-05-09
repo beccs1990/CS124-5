@@ -12,6 +12,8 @@
 
 
 int main(int argc, const char * argv[]) {
+    
+    /**Get current working directory**/
     string filePath;
     char cwd[256];
     if (getcwd(cwd, sizeof(cwd)) == NULL){
@@ -20,9 +22,9 @@ int main(int argc, const char * argv[]) {
         string s(cwd);
         filePath = s + "/images";
     }
-    cout << filePath << endl; 
+    
     vector<string> listImageFile = fileSysTem::listImageFile(filePath);
     int lengthOfImage = fileSysTem::getImageLength(listImageFile[0]);
-    cout << "Length of image: " << lengthOfImage << endl;
+    //cout << "Length of image: " << lengthOfImage << endl;
     return 0;
 }
