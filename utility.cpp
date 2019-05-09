@@ -22,8 +22,9 @@ vector<string> fileSysTem::listImageFile(string filePath){
     while ((dp = readdir(dirp)) != NULL) {
         string fileName = dp->d_name;
         if (fileName == "." || fileName == "..")
-            continue; 
-        listFile.push_back(fileName);
+            continue;
+        string fullPath = filePath + "/" + fileName;
+        listFile.push_back(fullPath);
     }
     closedir(dirp);
     return listFile;

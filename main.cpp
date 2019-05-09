@@ -8,16 +8,21 @@
 
 #include <iostream>
 #include "utility.hpp"
+#include "unistd.h"
 
 
 int main(int argc, const char * argv[]) {
-    string filePath = "/Users/lythaihoa2311992/Desktop/CS/CS124/Project/Project/images";
+    string filePath;
+    char cwd[256];
+    if (getcwd(cwd, sizeof(cwd)) == NULL){
+        perror("getcwd() error");
+    }else{
+        string s(cwd);
+        filePath = s + "/images";
+    }
+    cout << filePath << endl; 
     vector<string> listImageFile = fileSysTem::listImageFile(filePath);
     int lengthOfImage = fileSysTem::getImageLength(listImageFile[0]);
-    
-    for (int i = 3; i < lengthOfImage; i++){
-        
-        
-    }
+    cout << "Length of image: " << lengthOfImage << endl;
     return 0;
 }
