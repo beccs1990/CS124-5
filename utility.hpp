@@ -26,11 +26,21 @@ namespace fileSysTem {
      **/
     int getImageLength(string fileName);
     
+    
+    /**
+     Split and convert current pixel string to integer
+     @param stringLine - current string line
+     @param delimeter - delimeter in that string
+     @return vector of string which is already split
+     **/
+    vector<int> split(string stringLine, char delimeter);
+    
     /**
      Go to specifict line in image file;
      @param fileName
      @return info of that line
      **/
-    vector<int> goToLine(string fileName, int lineNumber); 
+    vector<int> goToLine(string fileName, int lineNumber);
+    
 }
 #endif

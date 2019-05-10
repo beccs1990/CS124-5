@@ -47,8 +47,43 @@ int fileSysTem::getImageLength(string fileName){
 }
 
 /**
+ Split and convert current pixel string to integer
+ @param stringLine - current string line
+ @param delimeter - delimeter in that string
+ @return vector of string which is already split
+ **/
+vector<int> fileSysTem::split(string stringLine, char delimeter){
+    stringstream ss(stringLine);
+    string item;
+    vector<int> tokens;
+    while (getline(ss, item, delimeter)) {
+        istringstream iss (item);
+        int intergerNumber;
+        iss >> intergerNumber;
+        tokens.push_back(intergerNumber);
+    }
+    return tokens;
+    
+}
+
+/**
  Go to specifict line in image file;
- @param fileName
+ @param fileName - name of the image
+ @param lineNumber - line which need to go to
  @return info of that line
  **/
-
+vector<int> fileSysTem::goToLine(string fileName, int lineNumber){
+    vector<int> pixelList;
+    ifstream imageFile(fileName);
+    string line;
+    int countLine = 1;
+    getline (imageFile,line);
+    while(!imageFile.eof()){
+        getline (imageFile,line);
+        if (countLine == lineNumber){
+            pixelList = fileSysTem::split(line, ' ');
+        }
+        countLine = countLine + 1;
+    }
+    return pixelList;
+}
