@@ -1,14 +1,10 @@
 
-#include <map>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <string>
 #include <vector>
-#include <stdio.h>
-#include <sys/types.h>
 #include <dirent.h>
-#include <iterator>
 #include "utility.hpp"
 
 /**
