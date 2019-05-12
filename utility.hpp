@@ -2,12 +2,12 @@
 #ifndef utility_hpp
 #define utility_hpp
 
-#include <map>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
 #include <cmath>
+#include <queue>
 #include <stdio.h>
 
 using namespace std;
@@ -37,10 +37,12 @@ namespace fileSysTem {
     
     /**
      Go to specifict line in image file;
-     @param fileName
+     @param fileName - name of Image file
+     @param lineNumber - line number which is needed to go to
      @return info of that line
      **/
     vector<int> goToLine(string fileName, int lineNumber);
     
 }
+
 #endif
