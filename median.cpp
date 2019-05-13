@@ -3,10 +3,11 @@
 #include <cmath>
 #include <queue>
 #include "median.hpp"
-
+#include <iostream>
+using namespace std;
 
 calculateMedian::calculateMedian(vector<int> dataList){
-    numberList = dataList;
+    addNumber(dataList);
 }
 
 void calculateMedian::reBalanceQueue(){
@@ -22,12 +23,27 @@ void calculateMedian::reBalanceQueue(){
 
 void calculateMedian::addNumber(vector<int> listNumber){
     for (int i = 0; i < listNumber.size(); i++){
-        if (listNumber[i] < minHeap.top() || minHeap.size() == 0){
+        if (minHeap.size() == 0 || listNumber[i] < minHeap.top() ){
             minHeap.push(listNumber[i]);
         }else{
             maxHeap.push(listNumber[i]);
         }
-        reBalanceQueue();
+       reBalanceQueue();
     }
+    
+}
+
+int calculateMedian::getMedian(){
+    int pixelMedian;
+    if (minHeap.size() == 0 && maxHeap.size() == 0){
+        return 0;
+    }
+    
+    if (minHeap.size() == maxHeap.size()){
+        pixelMedian = (maxHeap.top() - minHeap.top())/2;
+    }else{
+        pixelMedian = maxHeap.top();
+    }
+    return pixelMedian;
     
 }

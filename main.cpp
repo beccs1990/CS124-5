@@ -7,7 +7,10 @@
 //
 
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include "utility.hpp"
+#include "median.hpp"
 #include "unistd.h"
 
 
@@ -24,32 +27,30 @@ int main(int argc, const char * argv[]) {
     }
     //cout << filePath << endl;
     vector<string> listImageFile = fileSysTem::listImageFile(filePath);
-    int lengthOfImage = fileSysTem::getImageLength(listImageFile[0]);
-    //lengthOfImage = 5;
-    for (int lineNumber = 4; lineNumber <= lengthOfImage; lineNumber++){
+    ifstream openFile(listImageFile[0].c_str());
+    string line;
+    int lineNumber = 1;
+    while(getline(openFile, line)){
+        if (lineNumber < 4){
+            lineNumber = lineNumber + 1;
+            continue;
+        }
         vector<int> redPixelList;
         vector<int> greenPixelList;
         vector<int> bluePixelList;
-        for (int j = 0; j < listImageFile.size(); j++){
-            vector<int> currentImagePixel = fileSysTem::goToLine(listImageFile[j], lineNumber);
+        
+        for (auto const& image: listImageFile){
+            vector<int> currentImagePixel = fileSysTem::goToLine(image, lineNumber);
             redPixelList.push_back(currentImagePixel[0]);
             greenPixelList.push_back(currentImagePixel[1]);
             bluePixelList.push_back(currentImagePixel[2]); 
         }
-        //for (int i = 0; i < redPixelList.size(); i++){
-        //    cout << redPixelList[i] << " ";
-        //}
-        //cout << endl;
-        //
-        //for (int i = 0; i < greenPixelList.size(); i++){
-        //    cout << greenPixelList[i] << " ";
-        //}
-        //cout << endl;
-        //
-        //for (int i = 0; i < bluePixelList.size(); i++){
-        //    cout << bluePixelList[i] << " ";
-        //}
-        //cout << endl;
+        calculateMedian redPixelMedian = calculateMedian(redPixelList);
+        calculateMedian greenPixelMedian = calculateMedian(greenPixelList);
+        calculateMedian bluePixelMedian = calculateMedian(bluePixelList);
+        cout <<"Line "<< lineNumber <<" "<< redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << endl;
+        lineNumber = lineNumber + 1;
+
     }
     return 0;
 }

@@ -19,7 +19,6 @@ using namespace std;
 
 struct calculateMedian {
 private:
-    vector<int> numberList;
     priority_queue<int> maxHeap;
     priority_queue<int, vector<int>, greater<int>> minHeap;
 public:
@@ -44,6 +43,11 @@ public:
      Rebalance max and min heap
      **/
     void reBalanceQueue();
+    
+    /**
+     Get median from Min and Max Heap
+     **/
+    int getMedian(); 
 };
 
 #endif /* median_hpp */
