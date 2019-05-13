@@ -6,9 +6,7 @@
 #include <iostream>
 using namespace std;
 
-calculateMedian::calculateMedian(vector<int> dataList){
-    addNumber(dataList);
-}
+calculateMedian::calculateMedian(){}
 
 void calculateMedian::reBalanceQueue(){
     if (minHeap.size() + 1 > maxHeap.size()){
@@ -21,16 +19,13 @@ void calculateMedian::reBalanceQueue(){
     
 }
 
-void calculateMedian::addNumber(vector<int> listNumber){
-    for (int i = 0; i < listNumber.size(); i++){
-        if (minHeap.size() == 0 || listNumber[i] < minHeap.top() ){
-            minHeap.push(listNumber[i]);
+void calculateMedian::addNumber(int number){
+        if (minHeap.size() == 0 || number < minHeap.top() ){
+            minHeap.push(number);
         }else{
-            maxHeap.push(listNumber[i]);
+            maxHeap.push(number);
         }
        reBalanceQueue();
-    }
-    
 }
 
 int calculateMedian::getMedian(){

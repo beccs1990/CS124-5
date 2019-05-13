@@ -35,19 +35,16 @@ int main(int argc, const char * argv[]) {
             lineNumber = lineNumber + 1;
             continue;
         }
-        vector<int> redPixelList;
-        vector<int> greenPixelList;
-        vector<int> bluePixelList;
-        
+
+        calculateMedian redPixelMedian; 
+        calculateMedian greenPixelMedian;
+        calculateMedian bluePixelMedian;
         for (auto const& image: listImageFile){
             vector<int> currentImagePixel = fileSysTem::goToLine(image, lineNumber);
-            redPixelList.push_back(currentImagePixel[0]);
-            greenPixelList.push_back(currentImagePixel[1]);
-            bluePixelList.push_back(currentImagePixel[2]); 
+            redPixelMedian.addNumber(currentImagePixel[0]);
+            greenPixelMedian.addNumber(currentImagePixel[1]);
+            bluePixelMedian.addNumber(currentImagePixel[2]);
         }
-        calculateMedian redPixelMedian = calculateMedian(redPixelList);
-        calculateMedian greenPixelMedian = calculateMedian(greenPixelList);
-        calculateMedian bluePixelMedian = calculateMedian(bluePixelList);
         cout <<"Line "<< lineNumber <<" "<< redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << endl;
         lineNumber = lineNumber + 1;
 
