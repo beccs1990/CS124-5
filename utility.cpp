@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <map>
 #include <dirent.h>
 #include "utility.hpp"
 
@@ -82,4 +83,23 @@ string fileSysTem::goToLine(string fileName, int lineNumber){
         countLine = countLine + 1;
     }
     // return line;
+}
+
+/**
+ Open up file to retrieve all image file data into hash map;
+ @param fileName - name of Image file
+ @return hash map of image data
+ **/
+map<int, string> fileSysTem::getImageData(string fileName) {
+    map<int, string> imageData;
+    ifstream imageFile(fileName);
+    string line;
+    int lineNumber = 1;
+    while(!imageFile.eof()){
+        getline (imageFile,line);
+        imageData[lineNumber] = line;
+//        cout << "data: " << lineNumber << "line: " << imageData[lineNumber] << endl;
+        lineNumber++;
+    }
+    return imageData;
 }

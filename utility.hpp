@@ -8,6 +8,7 @@
 #include <vector>
 #include <cmath>
 #include <queue>
+#include <map>
 #include <stdio.h>
 
 using namespace std;
@@ -42,7 +43,13 @@ namespace fileSysTem {
      @return info of that line
      **/
     string goToLine(string fileName, int lineNumber);
-    
+
+    /**
+     Open up file to retrieve all image file data into hash map;
+     @param fileName - name of Image file
+     @return hash map of image data
+     **/
+    map<int, string> getImageData(string fileName);
 }
 
 #endif
