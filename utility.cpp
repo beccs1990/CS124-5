@@ -63,12 +63,12 @@ vector<int> fileSysTem::split(string stringLine, char delimeter){
 }
 
 /**
- Go to specifict line in image file;
+ Go to specific line in image file;
  @param fileName - name of the image
  @param lineNumber - line which need to go to
  @return info of that line
  **/
-vector<int> fileSysTem::goToLine(string fileName, int lineNumber){
+string fileSysTem::goToLine(string fileName, int lineNumber){
     vector<int> pixelList;
     ifstream imageFile(fileName);
     string line;
@@ -77,9 +77,9 @@ vector<int> fileSysTem::goToLine(string fileName, int lineNumber){
     while(!imageFile.eof()){
         getline (imageFile,line);
         if (countLine == lineNumber){
-            pixelList = fileSysTem::split(line, ' ');
+            return line;
         }
         countLine = countLine + 1;
     }
-    return pixelList;
+    // return line;
 }

@@ -41,7 +41,7 @@ namespace fileSysTem {
      @param lineNumber - line number which is needed to go to
      @return info of that line
      **/
-    vector<int> goToLine(string fileName, int lineNumber);
+    string goToLine(string fileName, int lineNumber);
     
 }
 

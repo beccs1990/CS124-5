@@ -39,11 +39,20 @@ int main(int argc, const char * argv[]) {
         calculateMedian redPixelMedian; 
         calculateMedian greenPixelMedian;
         calculateMedian bluePixelMedian;
+        int red, green, blue;
+        string pixelLine;
+        size_t pos, next_pos;
+
         for (auto const& image: listImageFile){
-            vector<int> currentImagePixel = fileSysTem::goToLine(image, lineNumber);
-            redPixelMedian.addNumber(currentImagePixel[0]);
-            greenPixelMedian.addNumber(currentImagePixel[1]);
-            bluePixelMedian.addNumber(currentImagePixel[2]);
+            pixelLine = fileSysTem::goToLine(image, lineNumber);
+            pos = pixelLine.find(' ');
+            next_pos = pixelLine.find(' ', pos + 1);
+            red = stoi(pixelLine.substr(0, pos));
+            green = stoi(pixelLine.substr(pos + 1, next_pos));
+            blue = stoi(pixelLine.substr(next_pos));
+            redPixelMedian.addNumber(red);
+            greenPixelMedian.addNumber(green);
+            bluePixelMedian.addNumber(blue);
         }
         cout <<"Line "<< lineNumber <<" "<< redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << endl;
         lineNumber = lineNumber + 1;
