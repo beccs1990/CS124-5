@@ -1,11 +1,3 @@
-//
-//  main.cpp
-//  Project
-//
-//  Created by Hoa on 5/7/19.
-//  Copyright © 2019 Hoa Ly. All rights reserved.
-//
-
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -28,6 +20,7 @@ int main(int argc, const char * argv[]) {
     }
     //cout << filePath << endl;
     vector<string> listImageFile = fileSysTem::listImageFile(filePath);
+    sort(listImageFile.begin(), listImageFile.end());
     vector<map<int, string>> imagesList = fileSysTem::getListOfMap(listImageFile);
 
     int sizeImage = imagesList[0].size();
@@ -45,8 +38,6 @@ int main(int argc, const char * argv[]) {
             int red, green, blue;
             size_t pos, next_pos;
             string pixelLine = imagesList[i][lineNumber];
-            //cout << "image number: " << i;
-            //cout << " pixel line: " << lineNumber << " " << pixelLine << endl;
             pos = pixelLine.find(' ');
             next_pos = pixelLine.find(' ', pos + 1);
             red = stoi(pixelLine.substr(0, pos));
@@ -56,7 +47,7 @@ int main(int argc, const char * argv[]) {
             greenPixelMedian.addNumber(green);
             bluePixelMedian.addNumber(blue);
         }
-        cout <<"Line "<< lineNumber <<" "<< redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << endl;
+        cout << redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << endl;
 
     }
     return 0;

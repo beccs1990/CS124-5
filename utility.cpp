@@ -54,9 +54,8 @@ map<int, string> fileSysTem::getImageData(string fileName) {
     while(!imageFile.eof()){
         getline (imageFile,line);
         imageData[lineNumber] = line;
-        //cout << "data: " << lineNumber << "line: " << imageData[lineNumber] << endl;
         lineNumber++;
     }
-    imageFile.close(); 
+    imageFile.close();
     return imageData;
 }
