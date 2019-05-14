@@ -28,43 +28,35 @@ int main(int argc, const char * argv[]) {
     }
     //cout << filePath << endl;
     vector<string> listImageFile = fileSysTem::listImageFile(filePath);
-    vector<map<int, string>> imagesList;
-    ifstream openFile(listImageFile[0].c_str());
-    string line;
-    int lineNumber = 1;
+    vector<map<int, string>> imagesList = fileSysTem::getListOfMap(listImageFile);
 
-    for (int i = 0; i < listImageFile.size(); i++) {
-        imagesList.push_back(fileSysTem::getImageData(listImageFile[i]));
-    }
-    cout << "list length: " << imagesList.size() << endl;
-
-    while(getline(openFile, line)){
+    int sizeImage = imagesList[0].size();
+    int imageListSize = imagesList.size();
+    for (int lineNumber = 1; lineNumber < sizeImage; lineNumber++){
+    
         if (lineNumber < 4){
-            lineNumber = lineNumber + 1;
             continue;
         }
-
         calculateMedian redPixelMedian; 
         calculateMedian greenPixelMedian;
         calculateMedian bluePixelMedian;
-        int red, green, blue;
-        string pixelLine;
-        size_t pos, next_pos;
 
-        for (auto const& image: listImageFile) {
-//            pixelLine = fileSysTem::goToLine(image, lineNumber);
-//            cout << "pixel line: " << endl;
-//            pos = pixelLine.find(' ');
-//            next_pos = pixelLine.find(' ', pos + 1);
-//            red = stoi(pixelLine.substr(0, pos));
-//            green = stoi(pixelLine.substr(pos + 1, next_pos));
-//            blue = stoi(pixelLine.substr(next_pos));
-//            redPixelMedian.addNumber(red);
-//            greenPixelMedian.addNumber(green);
-//            bluePixelMedian.addNumber(blue);
+        for (int i = 0; i < imageListSize; i++) {
+            int red, green, blue;
+            size_t pos, next_pos;
+            string pixelLine = imagesList[i][lineNumber];
+            //cout << "image number: " << i;
+            //cout << " pixel line: " << lineNumber << " " << pixelLine << endl;
+            pos = pixelLine.find(' ');
+            next_pos = pixelLine.find(' ', pos + 1);
+            red = stoi(pixelLine.substr(0, pos));
+            green = stoi(pixelLine.substr(pos + 1, next_pos));
+            blue = stoi(pixelLine.substr(next_pos));
+            redPixelMedian.addNumber(red);
+            greenPixelMedian.addNumber(green);
+            bluePixelMedian.addNumber(blue);
         }
-//        cout <<"Line "<< lineNumber <<" "<< redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << endl;
-        lineNumber = lineNumber + 1;
+        cout <<"Line "<< lineNumber <<" "<< redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << endl;
 
     }
     return 0;

@@ -21,28 +21,11 @@ namespace fileSysTem {
     vector<string> listImageFile(string filePath);
     
     /**
-     Get file Length
-     @param fileName name
-     @return length of file
+     Get List of Map
+     @param listImage - vector of image
+     @return list of hash which contain image data
      **/
-    int getImageLength(string fileName);
-    
-    
-    /**
-     Split and convert current pixel string to integer
-     @param stringLine - current string line
-     @param delimeter - delimeter in that string
-     @return vector of string which is already split
-     **/
-    vector<int> split(string stringLine, char delimeter);
-    
-    /**
-     Go to specifict line in image file;
-     @param fileName - name of Image file
-     @param lineNumber - line number which is needed to go to
-     @return info of that line
-     **/
-    string goToLine(string fileName, int lineNumber);
+    vector<map<int, string>> getListOfMap(vector<string> listImage); 
 
     /**
      Open up file to retrieve all image file data into hash map;
@@ -50,6 +33,8 @@ namespace fileSysTem {
      @return hash map of image data
      **/
     map<int, string> getImageData(string fileName);
+    
+    
 }
 
 #endif

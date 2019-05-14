@@ -28,62 +28,18 @@ vector<string> fileSysTem::listImageFile(string filePath){
 }
 
 /**
- Get file Length
- @param fileName image name
- @return length of file
+ Get List of Map
+ @param listImage - vector of image
+ @return list of hash which contain image data
  **/
-int fileSysTem::getImageLength(string fileName){
-    int numLine = 0;
-    string line;
-    ifstream is(fileName.c_str());
-    while(getline(is, line)){
-        numLine++;
+vector<map<int, string>> fileSysTem::getListOfMap(vector<string> listImage){
+    vector<map<int, string>> listMapOfImage;
+    for (int i = 0; i < listImage.size(); i++) {
+        listMapOfImage.push_back(getImageData(listImage[i]));
     }
-    is.close();
-    return numLine;
+    return listMapOfImage; 
 }
 
-/**
- Split and convert current pixel string to integer
- @param stringLine - current string line
- @param delimeter - delimeter in that string
- @return vector of string which is already split
- **/
-vector<int> fileSysTem::split(string stringLine, char delimeter){
-    stringstream ss(stringLine);
-    string item;
-    vector<int> tokens;
-    while (getline(ss, item, delimeter)) {
-        istringstream iss (item);
-        int intergerNumber;
-        iss >> intergerNumber;
-        tokens.push_back(intergerNumber);
-    }
-    return tokens;
-    
-}
-
-/**
- Go to specific line in image file;
- @param fileName - name of the image
- @param lineNumber - line which need to go to
- @return info of that line
- **/
-string fileSysTem::goToLine(string fileName, int lineNumber){
-    vector<int> pixelList;
-    ifstream imageFile(fileName);
-    string line;
-    int countLine = 1;
-    getline (imageFile,line);
-    while(!imageFile.eof()){
-        getline (imageFile,line);
-        if (countLine == lineNumber){
-            return line;
-        }
-        countLine = countLine + 1;
-    }
-    // return line;
-}
 
 /**
  Open up file to retrieve all image file data into hash map;
@@ -98,7 +54,7 @@ map<int, string> fileSysTem::getImageData(string fileName) {
     while(!imageFile.eof()){
         getline (imageFile,line);
         imageData[lineNumber] = line;
-//        cout << "data: " << lineNumber << "line: " << imageData[lineNumber] << endl;
+        //cout << "data: " << lineNumber << "line: " << imageData[lineNumber] << endl;
         lineNumber++;
     }
     return imageData;
