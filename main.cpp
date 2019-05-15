@@ -16,39 +16,40 @@ int main(int argc, const char * argv[]) {
         perror("getcwd() error");
     }else{
         string s(cwd);
-        filePath = s + "/images";
+        filePath = s + "/image2";
     }
     //cout << filePath << endl;
     vector<string> listImageFile = fileSysTem::listImageFile(filePath);
     sort(listImageFile.begin(), listImageFile.end());
-    vector<map<int, string>> imagesList = fileSysTem::getListOfMap(listImageFile);
+    vector<map<int, vector<int>>> imagesList = fileSysTem::getListOfMap(listImageFile);
 
     int sizeImage = imagesList[0].size();
     int imageListSize = imagesList.size();
-    for (int lineNumber = 1; lineNumber < sizeImage; lineNumber++){
     
-        if (lineNumber < 4){
-            continue;
-        }
-        calculateMedian redPixelMedian; 
-        calculateMedian greenPixelMedian;
-        calculateMedian bluePixelMedian;
+    ofstream outputFile;
+    outputFile.open("result.ppm");
+   // outputFile << "P3\n";
+   // outputFile << "495 557\n";
+   // outputFile << "255\n";
+    
+    for (int lineNumber = 0; lineNumber < sizeImage; lineNumber++){
+    
+       calculateMedian redPixelMedian;
+       calculateMedian greenPixelMedian;
+       calculateMedian bluePixelMedian;
 
         for (int i = 0; i < imageListSize; i++) {
-            int red, green, blue;
-            size_t pos, next_pos;
-            string pixelLine = imagesList[i][lineNumber];
-            pos = pixelLine.find(' ');
-            next_pos = pixelLine.find(' ', pos + 1);
-            red = stoi(pixelLine.substr(0, pos));
-            green = stoi(pixelLine.substr(pos + 1, next_pos));
-            blue = stoi(pixelLine.substr(next_pos));
-            redPixelMedian.addNumber(red);
-            greenPixelMedian.addNumber(green);
-            bluePixelMedian.addNumber(blue);
+
+            vector<int> pixelLineList = imagesList[i][lineNumber];
+            redPixelMedian.addNumber(pixelLineList[0]);
+            greenPixelMedian.addNumber(pixelLineList[1]);
+            bluePixelMedian.addNumber(pixelLineList[2]);
         }
-        cout << redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << endl;
+        outputFile << redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << "\n";
+        
+        cout << redPixelMedian.getMedian() << " " << greenPixelMedian.getMedian() << " " << bluePixelMedian.getMedian() << endl;;
 
     }
+    outputFile.close();
     return 0;
 }

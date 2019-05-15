@@ -20,21 +20,20 @@ namespace fileSysTem {
      **/
     vector<string> listImageFile(string filePath);
     
+    vector<string> split(string stringLine, char delimeter);
+    
     /**
      Get List of Map
      @param listImage - vector of image
      @return list of hash which contain image data
      **/
-    vector<map<int, string>> getListOfMap(vector<string> listImage); 
+    vector<map<int, vector<int>>> getListOfMap(vector<string> listImage); 
 
     /**
      Open up file to retrieve all image file data into hash map;
      @param fileName - name of Image file
      @return hash map of image data
      **/
-    map<int, string> getImageData(string fileName);
-    
-    
-}
-
+     map<int, vector<int>> getImageData(string fileName);
+} 
 #endif
