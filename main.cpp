@@ -16,7 +16,7 @@ int main(int argc, const char * argv[]) {
         perror("getcwd() error");
     }else{
         string s(cwd);
-        filePath = s + "/image2";
+        filePath = s + "/images";
     }
     //cout << filePath << endl;
     vector<string> listImageFile = fileSysTem::listImageFile(filePath);

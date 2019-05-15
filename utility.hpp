@@ -44,6 +44,14 @@ namespace fileSysTem {
      map<int, vector<int>> getImageData(string fileName);
     
     /**
+     Convert vector to map
+     @param pixelList - current pixel vector
+     @return imageData - return approriate hash which contain pixel
+     **/
+    
+    map<int, vector<int>> convertVectorToMap(vector<string> pixelList);
+    
+    /**
      Intialize the image
      @param imageName - name of Image
      @param imageFrom - image which will be copied header from

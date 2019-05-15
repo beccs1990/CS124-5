@@ -57,48 +57,51 @@ vector<string> fileSysTem::split(string stringLine, char delimeter){
 }
 
 /**
- Open up file to retrieve all image file data into hash map;
- @param fileName - name of Image file
- @return hash map of image data
+ Convert vector to map
+ @param pixelList - current pixel vector
+ @return imageData - return approriate hash which contain pixel
  **/
-map<int, vector<int>> fileSysTem::getImageData(string fileName) {
+
+map<int, vector<int>> fileSysTem::convertVectorToMap(vector<string> pixelList){
     map<int, vector<int>> imageData;
-    ifstream imageFile(fileName);
-    string line;
-    int lineNumber = 1;
-    vector<string> lineList;
-    while(!imageFile.eof()) {
-        getline (imageFile,line);
-        vector<string> currentLine = split(line, ' ');
-        lineList.insert(lineList.end(), currentLine.begin(), currentLine.end());
-        lineNumber++;
-    }
-    imageFile.close();
-    
-    /**
-     Put info to hash
-     **/
     int i = 0;
     int counter = 0;
     int hashLineNumber = 0;
-    int sizeLineList = lineList.size();
-    while (i < sizeLineList){
+    int sizePixelList = pixelList.size();
+    while (i < sizePixelList){
         vector<int>rbgList;
         if (counter < 4){
             counter = counter + 1;
             i = i + 1;
             continue;
         }
-        for (int j = 0; j < 3; j++){
-            if (i < sizeLineList){
-                rbgList.push_back(stoi(lineList[i]));
-            }
+        for (int j = 0; j < 3 && i < sizePixelList; j++){
+            rbgList.push_back(stoi(pixelList[i]));
             i = i + 1;
         }
         imageData[hashLineNumber] = rbgList;
         hashLineNumber = hashLineNumber + 1;
-        
     }
+    return imageData;
+}
+
+/**
+ Open up file to retrieve all image file data into hash map;
+ @param fileName - name of Image file
+ @return hash map of image data
+ **/
+map<int, vector<int>> fileSysTem::getImageData(string fileName) {
+    ifstream imageFile(fileName);
+    string line;
+    vector<string> lineList;
+    while(!imageFile.eof()) {
+        getline (imageFile,line);
+        vector<string> currentLine = split(line, ' ');
+        lineList.insert(lineList.end(), currentLine.begin(), currentLine.end());
+    }
+    imageFile.close();
+    
+    map<int, vector<int>> imageData = convertVectorToMap(lineList);
     return imageData;
 }
 
