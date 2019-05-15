@@ -35,9 +35,14 @@ int calculateMedian::getMedian(){
     }
     
     if (minHeap.size() == maxHeap.size()){
-        pixelMedian = (maxHeap.top() - minHeap.top())/2;
+        pixelMedian = (maxHeap.top() + minHeap.top())/2;
+        //cout << "This is " << maxHeap.top() << " - " << minHeap.top() << endl;
     }else{
-        pixelMedian = maxHeap.top();
+        if (minHeap.size() > maxHeap.size()){
+            pixelMedian = minHeap.top();
+        }else{
+            pixelMedian = maxHeap.top();
+        }
     }
     return pixelMedian;
     
