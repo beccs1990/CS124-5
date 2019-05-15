@@ -43,21 +43,8 @@ int main(int argc, const char * argv[]) {
        calculateMedian redPixelMedian;
        calculateMedian greenPixelMedian;
        calculateMedian bluePixelMedian;
-       // 129 138 155
-       // 93 114 135
-       // 90 110 135
-      //  108 123 142
-      //  99 115 138
-      //  104 119 142
-      //  88 110 133
-      //  82 106 130
-      //  94 110 133
-      //  101 118 136
-      //  115 127 141
-      //  111 129 143
-        //vector<int> exampleList {155,135,135,142,138,142,133,130,133,136,141,143};
-        //for (int i = 0; i < exampleList.size(); i++){
-        for (int i = 0; i < imageListSize; i++) {
+
+       for (int i = 0; i < imageListSize; i++) {
 
            vector<int> pixelLineList = imagesList[i][lineNumber];
            redPixelMedian.addNumber(pixelLineList[0]);
