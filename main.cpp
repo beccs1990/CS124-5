@@ -26,11 +26,17 @@ int main(int argc, const char * argv[]) {
     int sizeImage = imagesList[0].size();
     int imageListSize = imagesList.size();
     
+    /**
+     Initialize new image with header
+     **/
+    string imageName = "result.ppm";
+    fileSysTem::initializedImage(imageName, listImageFile[0]);
+    
+    /**
+     Continue writing to file
+     **/
     ofstream outputFile;
-    outputFile.open("result.ppm");
-   // outputFile << "P3\n";
-   // outputFile << "495 557\n";
-   // outputFile << "255\n";
+    outputFile.open(imageName, ios::app);
     
     for (int lineNumber = 0; lineNumber < sizeImage; lineNumber++){
     

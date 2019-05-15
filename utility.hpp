@@ -20,6 +20,13 @@ namespace fileSysTem {
      **/
     vector<string> listImageFile(string filePath);
     
+    
+    /**
+    Split and convert current pixel string to integer
+    @param stringLine - current string line
+    @param delimeter - delimeter in that string
+    @return vector of string which is already split
+    **/
     vector<string> split(string stringLine, char delimeter);
     
     /**
@@ -35,5 +42,12 @@ namespace fileSysTem {
      @return hash map of image data
      **/
      map<int, vector<int>> getImageData(string fileName);
+    
+    /**
+     Intialize the image
+     @param imageName - name of Image
+     @param imageFrom - image which will be copied header from
+     **/
+    void initializedImage (string imageName, string imageFrom); 
 } 
 #endif

@@ -39,7 +39,12 @@ vector<map<int, vector<int>>> fileSysTem::getListOfMap(vector<string> listImage)
     }
     return listMapOfImage; 
 }
-
+/**
+ Split and convert current pixel string to integer
+ @param stringLine - current string line
+ @param delimeter - delimeter in that string
+ @return vector of string which is already split
+ **/
 vector<string> fileSysTem::split(string stringLine, char delimeter){
     stringstream ss(stringLine);
     string item;
@@ -68,7 +73,6 @@ map<int, vector<int>> fileSysTem::getImageData(string fileName) {
         lineList.insert(lineList.end(), currentLine.begin(), currentLine.end());
         lineNumber++;
     }
-    cout <<"Size of image list: " << lineList.size() << endl;
     imageFile.close();
     
     /**
@@ -77,8 +81,8 @@ map<int, vector<int>> fileSysTem::getImageData(string fileName) {
     int i = 0;
     int counter = 0;
     int hashLineNumber = 0;
-    int sizeLineLiist = lineList.size();
-    while (i < sizeLineLiist){
+    int sizeLineList = lineList.size();
+    while (i < sizeLineList){
         vector<int>rbgList;
         if (counter < 4){
             counter = counter + 1;
@@ -86,7 +90,7 @@ map<int, vector<int>> fileSysTem::getImageData(string fileName) {
             continue;
         }
         for (int j = 0; j < 3; j++){
-            if (i < sizeLineLiist){
+            if (i < sizeLineList){
                 rbgList.push_back(stoi(lineList[i]));
             }
             i = i + 1;
@@ -95,6 +99,28 @@ map<int, vector<int>> fileSysTem::getImageData(string fileName) {
         hashLineNumber = hashLineNumber + 1;
         
     }
-    cout <<"Size of image map: " << imageData.size() << endl;
     return imageData;
+}
+
+/**
+ Intialize the image
+ @param imageName - name of Image
+ @param imageFrom - image which will be copied header from
+ **/
+void fileSysTem::initializedImage (string imageName, string imageFrom){
+    ofstream outputFile (imageName);
+    ifstream imageFile(imageFrom);
+    string line;
+    int counting = 1;
+    while(!imageFile.eof()) {
+        getline (imageFile,line);
+        if (counting < 4){
+            outputFile << line << "\n";
+        }else{
+            break;
+        }
+        counting = counting + 1;
+    }
+    outputFile.close();
+    imageFile.close(); 
 }
