@@ -41,6 +41,7 @@ vector<string> fileSysTem::listImageFile(string filePath){
  @return list of hash which contain image data
  **/
 vector<map<int, vector<int>>> fileSysTem::getListOfMap(vector<string> listImage){
+    /* Create a vector to hold hash map data returned from getImageData */
     vector<map<int, vector<int>>> listMapOfImage;
     /**Go to list of image file, put their data into map. Then, putting map to vector list**/
     for (int i = 0; i < listImage.size(); i++) {
